@@ -1,0 +1,51 @@
+<ion-content>
+    <div class="contain">
+        <ion-card class="card">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="6" class="col1">
+                            <img src="assets/logo.png" alt="Logo png">
+                        </ion-col>
+                        <ion-col size="6" class="col2">
+                            <h1 class="title">Bienvenido</h1>
+                            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                                <ion-item class="full-width-input mt-2 ion-no-padding">
+                                  <ion-input 
+                                  formControlName="email"
+                                  placeholder="Correo Electrónico" 
+                                  type="text" 
+                                  required
+                                  ></ion-input>
+                                </ion-item>
+                                <p *ngIf="esValido('email')" class="danger">{{ mostrarError('email') }}</p>
+                        
+                                <ion-item class="full-width-input mt-3 ion-no-padding">
+                                  <ion-input
+                                  [type]="ocultarPass ? 'password' : 'text'"
+                                  formControlName="pass"
+                                  placeholder="Contraseña" 
+                                  type="password" 
+                                  required
+                                  ></ion-input>
+                                  <ion-icon [name]="ocultarPass ? 'eye' : 'eye-off'" slot="end" (click)="ocultarPass = !ocultarPass"></ion-icon>
+                                </ion-item>
+                                <p *ngIf="esValido('pass')" class="danger">{{ mostrarError('pass') }}</p>
+                        
+                                <ion-button 
+                                  [disabled]="loginForm.invalid"
+                                  type="submit"
+                                  expand="block" 
+                                  class="mt-5 mb-3"
+                                >ACCEDER</ion-button>
+                      
+                              </form>
+
+                              <a routerLink="/recuperar-pass">¿Olvidaste la contraseña?</a><br>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

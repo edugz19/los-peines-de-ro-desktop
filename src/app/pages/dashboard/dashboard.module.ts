@@ -7,14 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
+import { ComponentsModule } from '../../components/components.module';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DashboardPageRoutingModule
+    DashboardPageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [DashboardPage]
+  declarations: [DashboardPage],
+  providers: [
+    AuthGuard
+  ]
 })
 export class DashboardPageModule {}

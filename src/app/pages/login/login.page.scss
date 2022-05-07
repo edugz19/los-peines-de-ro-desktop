@@ -1,0 +1,73 @@
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-image: url(../../../assets/fondo.webp);
+}
+
+.card {
+    border-radius: 20px;
+}
+
+ion-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    width: 1000px;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.col1 {
+    padding: 100px;
+    border-right: rgb(141, 141, 141) solid 2px;
+    border-radius: 20px;
+}
+
+.col2 {
+    border-left: rgb(141, 141, 141) solid 2px;
+    border-radius: 20px;
+}
+
+form {
+    width: 80%;
+}
+
+ion-button {
+    font-weight: bold;
+}
+
+ion-input {
+    text-align: start;
+    color:#757575;
+}
+
+.danger {
+    color: red;
+    text-align: left;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.forget {
+    margin-top: 30px;
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-input {
+        color: white;
+    }
+}

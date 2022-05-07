@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FacturasPageRoutingModule } from './facturas-routing.module';
 
 import { FacturasPage } from './facturas.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FacturasPageRoutingModule
+    FacturasPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [FacturasPage]
 })
