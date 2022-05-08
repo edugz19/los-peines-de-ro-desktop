@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { ReservasService } from 'src/app/services/reservas.service';
+import { ServiciosService } from 'src/app/services/servicios.service';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +23,11 @@ export class LoginPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authSvc: AuthService,
-    public router: Router
+    public router: Router,
+    private variables: VariablesService,
+    private reservaSvc: ReservasService,
+    private categoriaSvc: CategoriasService,
+    private servicioSvc: ServiciosService
   ) { }
 
   ngOnInit() {
@@ -31,6 +39,7 @@ export class LoginPage implements OnInit {
     try {
       const usuario = await this.authSvc.login(email, pass);
       if (usuario) {
+        await this.initializateData();
         this.router.navigateByUrl('dashboard');
       }
 
@@ -56,6 +65,12 @@ export class LoginPage implements OnInit {
       this.loginForm.get(campo)?.dirty &&
       this.loginForm.get(campo)?.invalid
     );
+  }
+
+  initializateData(): void {
+    this.servicioSvc.getServicios().subscribe( servs => this.variables.servicios = servs );
+    this.reservaSvc.getReservas().subscribe( reservas => this.variables.reservas = reservas);
+    this.categoriaSvc.getCategorias().subscribe( cats => this.variables.categorias = cats );
   }
 
 }

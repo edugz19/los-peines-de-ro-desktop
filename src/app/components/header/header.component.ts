@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -7,6 +7,8 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() titulo: string;
 
   constructor(
     private menuCtrl: MenuController

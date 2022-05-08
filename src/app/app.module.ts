@@ -4,6 +4,10 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
@@ -14,6 +18,12 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ComponentsModule } from './components/components.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthGuard } from './guards/auth.guard';
+
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 
 @NgModule({
@@ -29,8 +39,8 @@ import { AuthGuard } from './guards/auth.guard';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-
-    ComponentsModule
+    ComponentsModule,
+    FullCalendarModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
