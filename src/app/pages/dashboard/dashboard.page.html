@@ -1,3 +1,121 @@
 <app-header [titulo]="'Dashboard'"></app-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-grid style="height: 90%">
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-title>RESERVAS</ion-card-title>
+          <div class="content">
+            <div class="img">
+              <img src="assets/dashboard/reserva.png" alt="" width="200px" />
+            </div>
+            <div class="datos">
+              <h3>
+                Hoy tienes un total de
+                <span class="numero1">{{ this.reservasHoy.length }}</span>
+                &nbsp;reservas.
+              </h3>
+            </div>
+          </div>
+          <ion-button expand="block">Ir a reservas</ion-button>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-title>CREAR UNA RESERVA</ion-card-title>
+          <div class="content" style="justify-content: center">
+            <img
+              src="assets/dashboard/anadir-evento.png"
+              alt=""
+              width="200px"
+            />
+          </div>
+          <ion-button expand="block">Añadir reserva</ion-button>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-title>SERVICIOS</ion-card-title>
+          <div class="content">
+            <div class="img">
+              <img src="assets/dashboard/objetivo.png" alt="" width="200px" />
+            </div>
+            <div class="datos">
+              <h3>
+                Tienes en venta un total de
+                <span class="numero2"
+                  >{{ this.variables.servicios.length }}</span
+                >
+                &nbsp;servicios.
+              </h3>
+            </div>
+          </div>
+          <ion-button expand="block">Visualizar servicios</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-title>CATEGORÍAS</ion-card-title>
+          <div class="content">
+            <div class="img">
+              <img src="assets/dashboard/categorias.png" alt="" width="200px" />
+            </div>
+            <div class="datos">
+              <h3>
+                Tienes un total de
+                <span class="numero3"
+                  >{{ this.variables.categorias.length }}</span
+                >
+                &nbsp;categorías.
+              </h3>
+            </div>
+          </div>
+          <ion-button expand="block">Visualizar categorías</ion-button>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+            <ion-card-title>FACTURACIÓN DE HOY</ion-card-title>
+            <div class="content">
+                <div class="img">
+                  <img src="assets/dashboard/facturacion.png" alt="" width="200px" />
+                </div>
+                <div class="datos">
+                  <h3>
+                    Hoy tienes facturado un total de  
+                    <span class="numero4"
+                      >{{ this.dineroHoy.toFixed(2) }}</span
+                    >
+                    <span class="euro">€</span>
+                  </h3>
+                </div>
+              </div>
+            <ion-button expand="block">Hacer caja</ion-button>
+          </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-title>FACTURACIÓN DE ESTE MES</ion-card-title>
+          <div class="content">
+            <div class="img">
+              <img src="assets/dashboard/suscripcion.png" alt="" width="200px" />
+            </div>
+            <div class="datos">
+              <h3>
+                Este mes tienes facturados un total de 
+                <span class="numero5"
+                  >{{ this.dineroMensual.toFixed(2) }}</span
+                >
+                <span class="euro">€</span>
+              </h3>
+            </div>
+          </div>
+          <ion-button expand="block">Ver resumen de la facturación</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -25,7 +25,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'facturas',
+    path: 'contabilidad',
     loadChildren: () => import('./pages/facturas/facturas.module').then( m => m.FacturasPageModule),
     canActivate: [AuthGuard]
   },

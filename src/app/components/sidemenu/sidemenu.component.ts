@@ -14,7 +14,7 @@ export class SidemenuComponent implements OnInit {
     { title: 'Dashboard', url: '/dashboard', icon: 'grid' },
     { title: 'Reservas', url: '/reservas', icon: 'calendar' },
     { title: 'Servicios', url: '/servicios', icon: 'server' },
-    { title: 'Facturas', url: '/facturas', icon: 'receipt' }
+    { title: 'Contabilidad', url: '/contabilidad', icon: 'logo-euro' }
   ];
 
   constructor(
