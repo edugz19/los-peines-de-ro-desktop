@@ -37,7 +37,7 @@ export class DashboardPage implements OnInit {
 
   obtenerReservasHoy() {
     setTimeout(() => {
-      this.reservasHoy = this.variables.reservas.filter(reserva => reserva.fecha === '2022-05-19');
+      this.reservasHoy = this.variables.reservas.filter(reserva => reserva.fecha === this.today);
       this.obtenerFacturacionHoy();
     }, 3000);
   }
