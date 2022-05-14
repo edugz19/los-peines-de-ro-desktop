@@ -31,4 +31,16 @@ export class ServiciosService {
   getServicioconID(id) {
     return this.db.collection<Servicio>('servicios').doc(id).valueChanges();
   }
+
+  addServicio(servicio: Servicio) {
+    this.db.collection('servicios').doc(servicio.id).set(servicio);
+  }
+
+  editServicio(servicio: Servicio) {
+    this.db.collection('servicios').doc(servicio.id).update(servicio);
+  }
+
+  deleteServicio(id: string) {
+    this.db.collection('servicios').doc(id).delete();
+  }
 }

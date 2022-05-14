@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Servicio } from 'src/app/models/Servicio';
 import { VariablesService } from '../../services/variables.service';
+import { Router } from '@angular/router';
+import { ServiciosService } from '../../services/servicios.service';
+import { AlertController } from '@ionic/angular';
+import { AlertsService } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-servicios',
@@ -12,13 +16,20 @@ export class ServiciosPage implements OnInit {
   public serviciosTemp: Servicio[];
   public sinResultados: boolean;
 
-  constructor(public variables: VariablesService) {
+  constructor(
+    public variables: VariablesService,
+    public router: Router,
+    public servicioSvc: ServiciosService,
+    public alert: AlertController,
+    public alerts: AlertsService
+  ) {
     this.p = 1;
+  }
+
+  ngOnInit() {
     this.serviciosTemp = [];
     this.sinResultados = false;
   }
-
-  ngOnInit() {}
 
   getHoras(min: number): string {
     let duracion: string;
@@ -90,5 +101,36 @@ export class ServiciosPage implements OnInit {
     }
 
     console.log(this.serviciosTemp);
+  }
+
+  editarServicio(id: string) {
+    this.router.navigateByUrl('add-servicio/' + id);
+  }
+
+  borrarServicio(id: string) {
+    this.presentAlert(id);
+  }
+
+  async presentAlert(id: string) {
+    const alert = await this.alert.create({
+      header: 'Borrar Servicio',
+      message: '¿Está seguro de que quiere borrar este servicio?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Borrar',
+          handler: () => {
+            this.servicioSvc.deleteServicio(id);
+            this.alerts.presentToast('Servicio borrado correctamente', 'success');
+            this.ngOnInit();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

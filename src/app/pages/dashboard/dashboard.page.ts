@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { LoadingService } from '../../services/loading.service';
 import { AddReservaPage } from '../add-reserva/add-reserva.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +25,8 @@ export class DashboardPage implements OnInit {
   constructor(
     public variables: VariablesService,
     private loading: LoadingService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public router: Router
   ) {
     this.dineroHoy = 0;
     this.dineroMensual = 0;

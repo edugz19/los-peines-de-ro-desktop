@@ -46,6 +46,14 @@ const routes: Routes = [
     path: 'categorias',
     loadChildren: () => import('./pages/categorias/categorias.module').then( m => m.CategoriasPageModule)
   },
+  {
+    path: 'add-servicio',
+    loadChildren: () => import('./pages/add-servicio/add-servicio.module').then( m => m.AddServicioPageModule)
+  },
+  {
+    path: 'add-servicio/:id',
+    loadChildren: () => import('./pages/add-servicio/add-servicio.module').then( m => m.AddServicioPageModule)
+  }
 ];
 
 @NgModule({

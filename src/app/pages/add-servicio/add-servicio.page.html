@@ -1,0 +1,100 @@
+<app-header [titulo]="titulo"></app-header>
+
+<ion-content>
+  <div class="container">
+    <form [formGroup]="form">
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Nombre</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombre"
+          placeholder="Nombre del servicio ..."
+        />
+      </div>
+      <p *ngIf="esValido('nombre')" class="danger">
+        {{ mostrarError('nombre') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Categoría</span>
+        <select class="form-select form-select-lg" formControlName="categoria">
+          <option *ngFor="let cat of variables.categorias" [value]="cat.id">
+            {{ cat.nombre | titlecase }}
+          </option>
+        </select>
+      </div>
+      <p *ngIf="esValido('categoria')" class="danger">
+        {{ mostrarError('categoria') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Descripción</span>
+        <textarea
+          class="form-control"
+          formControlName="descripcion"
+          rows="3"
+          placeholder="Descripción del servicio ..."
+        ></textarea>
+      </div>
+      <p *ngIf="esValido('descripcion')" class="danger">
+        {{ mostrarError('descripcion') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Precio</span>
+        <input
+          formControlName="precio"
+          type="number"
+          min="0"
+          step="0.01"
+          class="form-control"
+          placeholder="Precio"
+        />
+        <span class="input-group-text">€</span>
+      </div>
+      <p *ngIf="esValido('precio')" class="danger">
+        {{ mostrarError('precio') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Duración (min)</span>
+        <input
+          formControlName="duracion"
+          type="number"
+          min="0"
+          step="15"
+          max="240"
+          class="form-control"
+          placeholder="Duración"
+        />
+      </div>
+      <p *ngIf="esValido('duracion')" class="danger">
+        {{ mostrarError('duracion') }}
+      </p>
+
+      <div class="buttons">
+        <ion-button color="danger" (click)="router.navigateByUrl('servicios')"
+          >Volver atrás</ion-button
+        >
+        <ion-button
+          *ngIf="url === null"
+          color="success"
+          type="submit"
+          [disabled]="form.invalid"
+          (click)="crearServicio()"
+          >Crear Servicio</ion-button
+        >
+
+        <ion-button
+          *ngIf="url !== null"
+          color="success"
+          type="submit"
+          [disabled]="form.invalid"
+          (click)="editarServicio()"
+          >Editar Servicio</ion-button
+        >
+      </div>
+    </form>
+  </div>
+</ion-content>

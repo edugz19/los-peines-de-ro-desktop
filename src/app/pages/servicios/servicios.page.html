@@ -28,7 +28,7 @@
   </div>
 
   <div class="add">
-    <ion-button style="width: 40%; font-weight: bold"
+    <ion-button style="width: 40%; font-weight: bold" (click)="router.navigateByUrl('add-servicio')"
       >Añadir servicio</ion-button
     >
   </div>
@@ -62,10 +62,10 @@
             {{ item.descripcion.substring(0,100) }}...
           </td>
           <td style="text-align: center">
-            <ion-button color="warning"
+            <ion-button color="warning" (click)="editarServicio(item.id)"
               ><ion-icon name="create"></ion-icon
             ></ion-button>
-            <ion-button color="danger"
+            <ion-button color="danger" (click)="borrarServicio(item.id)"
               ><ion-icon name="trash"></ion-icon
             ></ion-button>
           </td>
@@ -89,10 +89,10 @@
             {{ item.descripcion.substring(0,100) }}...
           </td>
           <td style="text-align: center">
-            <ion-button color="warning"
+            <ion-button color="warning" (click)="editarServicio(item.id)"
               ><ion-icon name="create"></ion-icon
             ></ion-button>
-            <ion-button color="danger"
+            <ion-button color="danger" (click)="borrarServicio(item.id)"
               ><ion-icon name="trash"></ion-icon
             ></ion-button>
           </td>

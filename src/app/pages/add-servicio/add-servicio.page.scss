@@ -1,0 +1,31 @@
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.label {
+    width: 170px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    ion-button {
+        font-weight: bold;
+        width: 49%;
+    }
+}
+
+.danger {
+    color: red;
+    text-align: left;
+    margin-top: 5px;
+    font-size: 16px;
+}
