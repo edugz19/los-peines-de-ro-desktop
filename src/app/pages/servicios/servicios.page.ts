@@ -118,17 +118,26 @@ export class ServiciosPage implements OnInit {
       buttons: [
         {
           text: 'Cancelar',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
           text: 'Borrar',
           handler: () => {
             this.servicioSvc.deleteServicio(id);
-            this.alerts.presentToast('Servicio borrado correctamente', 'success');
+            this.alerts.presentToast(
+              'Servicio borrado correctamente',
+              'success'
+            );
+            const input1 = document.getElementById(
+              'select'
+            ) as HTMLSelectElement;
+            input1.value = '00';
+            const input = document.getElementById('search') as HTMLInputElement;
+            input.value = '';
             this.ngOnInit();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
