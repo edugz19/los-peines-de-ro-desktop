@@ -1,0 +1,51 @@
+ion-datetime {
+    height: 100%;
+}
+
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.horario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.horario img {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.info-hora {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.button {
+    font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+    h4 {
+        color: white;
+    }
+
+    ion-datetime {
+        color: white;
+        background-color: #121212;
+    }
+
+    hr {
+        color: white;
+    }
+
+    div {
+        color: white 
+    }
+}

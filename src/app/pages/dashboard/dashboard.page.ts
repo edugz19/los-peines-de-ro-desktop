@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { VariablesService } from '../../services/variables.service';
 import { Reserva } from 'src/app/models/Reserva';
 import * as moment from 'moment';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { LoadingService } from '../../services/loading.service';
+import { AddReservaPage } from '../add-reserva/add-reserva.page';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,10 +19,12 @@ export class DashboardPage implements OnInit {
   public reservasMes: Reserva[];
   public dineroHoy: number;
   public dineroMensual: number;
+  public tamanoNumero: string;
 
   constructor(
     public variables: VariablesService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    public modalCtrl: ModalController
   ) {
     this.dineroHoy = 0;
     this.dineroMensual = 0;
@@ -59,6 +62,27 @@ export class DashboardPage implements OnInit {
     for (const reserva of this.reservasMes) {
       this.dineroMensual += reserva.precio;
     }
+
+    console.log(this.dineroMensual.toFixed(2).toString());
+
+    if (this.dineroMensual.toFixed(2).toString().length === 4) {
+      this.tamanoNumero = 'numero5';
+    } else if (this.dineroMensual.toFixed(2).toString().length === 5) {
+      this.tamanoNumero = 'numero6';
+    } else if (this.dineroMensual.toFixed(2).toString().length === 6) {
+      this.tamanoNumero = 'numero7';
+    } else if (this.dineroMensual.toFixed(2).toString().length === 7) {
+      this.tamanoNumero = 'numero8';
+    }
+  }
+
+  async abrirModalAdd() {
+    const modal = this.modalCtrl.create({
+      component: AddReservaPage,
+      cssClass: 'add-reserva-modal'
+    });
+
+    return await (await modal).present();
   }
 
 }

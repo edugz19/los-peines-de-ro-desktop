@@ -38,6 +38,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate: [LoginGuard]
   },
+  {
+    path: 'add-reserva',
+    loadChildren: () => import('./pages/add-reserva/add-reserva.module').then( m => m.AddReservaPageModule)
+  },
+  {
+    path: 'categorias',
+    loadChildren: () => import('./pages/categorias/categorias.module').then( m => m.CategoriasPageModule)
+  },
 ];
 
 @NgModule({

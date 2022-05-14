@@ -13,7 +13,7 @@
             <div class="datos">
               <h3>
                 Hoy tienes un total de
-                <span class="numero1">{{ this.reservasHoy.length }}</span>
+                <span class="numero1">{{ this.reservasHoy.length || 0 }}</span>
                 &nbsp;reservas.
               </h3>
             </div>
@@ -31,7 +31,7 @@
               width="200px"
             />
           </div>
-          <ion-button expand="block">Añadir reserva</ion-button>
+          <ion-button expand="block" (click)="abrirModalAdd()">Añadir reserva</ion-button>
         </ion-card>
       </ion-col>
       <ion-col size="4">
@@ -45,7 +45,7 @@
               <h3>
                 Tienes en venta un total de
                 <span class="numero2"
-                  >{{ this.variables.servicios.length }}</span
+                  >{{ this.variables.servicios.length || 0 }}</span
                 >
                 &nbsp;servicios.
               </h3>
@@ -67,7 +67,7 @@
               <h3>
                 Tienes un total de
                 <span class="numero3"
-                  >{{ this.variables.categorias.length }}</span
+                  >{{ this.variables.categorias.length || 0 }}</span
                 >
                 &nbsp;categorías.
               </h3>
@@ -84,10 +84,10 @@
                   <img src="assets/dashboard/facturacion.png" alt="" width="200px" />
                 </div>
                 <div class="datos">
-                  <h3>
+                  <h3 style="line-height: 1.3;">
                     Hoy tienes facturado un total de  
                     <span class="numero4"
-                      >{{ this.dineroHoy.toFixed(2) }}</span
+                      >{{ this.dineroHoy.toFixed(2) || 0 }}</span
                     >
                     <span class="euro">€</span>
                   </h3>
@@ -104,10 +104,10 @@
               <img src="assets/dashboard/suscripcion.png" alt="" width="200px" />
             </div>
             <div class="datos">
-              <h3>
+              <h3 style="line-height: 1.5;">
                 Este mes tienes facturados un total de 
-                <span class="numero5"
-                  >{{ this.dineroMensual.toFixed(2) }}</span
+                <span [class]="tamanoNumero"
+                  >{{ this.dineroMensual.toFixed(2) || 0 }}</span
                 >
                 <span class="euro">€</span>
               </h3>

@@ -18,13 +18,14 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ComponentsModule } from './components/components.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthGuard } from './guards/auth.guard';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import {NgxPaginationModule} from 'ngx-pagination';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
 ]);
-
 
 @NgModule({
   declarations: [
@@ -40,11 +41,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AngularFireStorageModule,
     AngularFireAuthModule,
     ComponentsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NoopAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthGuard
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

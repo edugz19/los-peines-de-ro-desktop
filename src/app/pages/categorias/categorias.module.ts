@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ServiciosPageRoutingModule } from './servicios-routing.module';
+import { CategoriasPageRoutingModule } from './categorias-routing.module';
 
-import { ServiciosPage } from './servicios.page';
-import { ComponentsModule } from '../../components/components.module';
+import { CategoriasPage } from './categorias.page';
+
+import { ComponentsModule } from 'src/app/components/components.module';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -16,10 +17,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CommonModule,
     FormsModule,
     IonicModule,
-    ServiciosPageRoutingModule,
+    CategoriasPageRoutingModule,
     ComponentsModule,
     NgxPaginationModule
   ],
-  declarations: [ServiciosPage]
+  declarations: [CategoriasPage]
 })
-export class ServiciosPageModule {}
+export class CategoriasPageModule {}

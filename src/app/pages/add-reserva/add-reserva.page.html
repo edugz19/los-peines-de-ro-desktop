@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold"
+      >Añadir reserva</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="height: 100%">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>Categoría</ion-label>
+          <ion-select
+            placeholder="Selecciona una"
+            okText="Seleccionar"
+            cancelText="Cancelar"
+            interface="popover"
+            (ionChange)="cargarServicios($event)"
+          >
+            <ion-select-option
+              *ngFor="let cat of variables.categorias"
+              [value]="cat.id"
+              >{{ cat.nombre | titlecase }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Servicio</ion-label>
+          <ion-select
+            placeholder="Selecciona una"
+            okText="Seleccionar"
+            cancelText="Cancelar"
+            interface="popover"
+            [disabled]="!selecCat"
+            [(ngModel)]="resetear"
+            (ionChange)="cargarFecha($event)"
+          >
+            <ion-select-option *ngFor="let serv of servCat" [value]="serv.id"
+              >{{ serv.nombre | titlecase }}</ion-select-option
+            ></ion-select
+          >
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="selectServ">
+      <ion-col>
+        <ion-item>
+          <ion-input
+            type="date"
+            [min]="today"
+            (ionChange)="cargarHorario($event)"
+            [(ngModel)]="resetearDate"
+          >
+            <ion-label style="margin-right: 270px">Escoge la fecha</ion-label>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!esDiaValido && selectDate" style="margin-top: 50px;">
+      <ion-col size="12">
+        <div class="horario">
+          <img src="assets/icon/no-disponible.png" alt="" *ngIf="!modoOscuro" />
+          <img
+            src="assets/icon/no-disponible-dark.png"
+            alt=""
+            *ngIf="modoOscuro"
+          />
+          <span style="text-align: center"
+            >Lo sentimos, no hay disponibilidad para esta fecha. Prueba con
+            otra.</span
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="esDiaValido && selectDate">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>Selecciona la hora</ion-label>
+          <ion-select
+            placeholder="Selecciona la hora"
+            [(ngModel)]="select"
+            (ionChange)="seleccionaHora($event, servicio.duracion)"
+          >
+            <ion-select-option *ngFor="let item of horarioReal" [value]="item"
+              >{{ item }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <div *ngIf="hora === ''" class="info-hora">
+          <p>Debes seleccionar una hora para continuar.</p>
+        </div>
+        <div *ngIf="hora !== ''" class="info-hora">
+          <span><strong>Hora: {{ hora }} </strong></span>
+          <span color="secondary"
+            >Finalizará aproximadamente a las {{ horaFin }}</span
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="button">
+      <ion-col>
+        <ion-button expand="block" (click)="crearReserva()">
+          Crear reserva
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

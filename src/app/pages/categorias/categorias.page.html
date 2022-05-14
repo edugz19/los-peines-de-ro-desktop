@@ -1,0 +1,77 @@
+<app-header [titulo]="'Categorías'"></app-header>
+
+<ion-content>
+  <div class="filtros">
+    <ion-searchbar
+      id="search"
+      placeholder="Busca la categoría..."
+      (keyup)="buscarCategoria($event)"
+      (ionClear)="buscarCategoria($event, '')"
+    ></ion-searchbar>
+    <ion-button>Añadir Categoría</ion-button>
+  </div>
+
+  <div class="contain" *ngIf="sinResultados === false">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th style="width: 110px">ID</th>
+          <th style="width: 700px">Nombre</th>
+          <th style="width: 300px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="categoriasTemp.length === 0">
+        <tr
+          *ngFor="let item of variables.categorias | paginate: { itemsPerPage: 8, currentPage: p }"
+        >
+          <td style="text-align: center">{{ item.id }}</td>
+          <td>{{ item.nombre | titlecase }}</td>
+          <td style="text-align: center">
+            <ion-button color="warning"
+              ><ion-icon name="create"></ion-icon
+            ></ion-button>
+            <ion-button color="danger"
+              ><ion-icon name="trash"></ion-icon
+            ></ion-button>
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="categoriasTemp.length > 0">
+        <tr
+          *ngFor="let item of categoriasTemp | paginate: { itemsPerPage: 8, currentPage: p }"
+        >
+          <td style="text-align: center">{{ item.id }}</td>
+          <td>{{ item.nombre | titlecase }}</td>
+          <td style="text-align: center">
+            <ion-button color="warning"
+              ><ion-icon name="create"></ion-icon
+            ></ion-button>
+            <ion-button color="danger"
+              ><ion-icon name="trash"></ion-icon
+            ></ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls
+      style="font-weight: bold"
+      (pageChange)="p = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+    ></pagination-controls>
+  </div>
+
+  <div
+    *ngIf="categoriasTemp.length === 0 && sinResultados === true"
+    class="p-3 mt-3"
+  >
+    <p class="text-center" style="font-size: 1.2em">
+      No hay resultados con su búsqueda.
+    </p>
+    <p class="text-center text-secondary" style="font-size: 1.2em">
+      Intente con algunas de las siguientes palabras: corte, mechas, peinado,
+      etc
+    </p>
+  </div>
+</ion-content>
