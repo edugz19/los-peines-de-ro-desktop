@@ -1,10 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  AlertController,
-  IonDatetime,
-  ModalController,
-  PopoverController,
-} from '@ionic/angular';
+import { AlertController, IonDatetime, ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { FESTIVOS } from 'src/app/constants/festivos.const';
 import { HORARIO } from 'src/app/constants/horario.const';
@@ -13,6 +8,9 @@ import { Servicio } from 'src/app/models/Servicio';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { VariablesService } from '../../services/variables.service';
 import { LoadingController } from '@ionic/angular';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertsService } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-add-reserva',
@@ -22,8 +20,16 @@ import { LoadingController } from '@ionic/angular';
 export class AddReservaPage implements OnInit {
   @ViewChild(IonDatetime, { static: true }) datetime: IonDatetime;
 
+  public selecCat = true;
+
+  public form = this.fb.group({
+    categoria: ['', [Validators.required]],
+    servicio: [{ value: '', disabled: true }, [Validators.required]],
+    fecha: [{ value: '', disabled: true }, [Validators.required]],
+    hora: [{value: '', disabled: true}, [Validators.required]]
+  });
+
   public modoOscuro: boolean;
-  public selecCat = false;
   public servCat: Servicio[] = [];
   public resetear: string;
   public resetearDate: string;
@@ -47,11 +53,13 @@ export class AddReservaPage implements OnInit {
   private reserva: Reserva;
 
   constructor(
-    public modalCtrl: ModalController,
     private reservaSvc: ReservasService,
     public variables: VariablesService,
     public alert: AlertController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public fb: FormBuilder,
+    public router: Router,
+    public alerts: AlertsService
   ) {}
 
   ngOnInit() {
@@ -64,49 +72,43 @@ export class AddReservaPage implements OnInit {
     }
   }
 
-  cerrarModal() {
-    this.modalCtrl.dismiss({
-      dismissed: true,
-    });
-  }
-
   cargarServicios(ev: any) {
     this.servCat = [];
+    this.form.get('fecha').disable();
+    this.form.get('hora').disable();
+    // this.form.patchValue({
+    //   fecha: '',
+    //   hora: ''
+    // });
+
     this.servCat = this.variables.servicios.filter(
-      (serv) => serv.categoria === ev.detail.value
+      (serv) => serv.categoria === ev
     );
-    this.selecCat = true;
-    this.selectServ = false;
-    this.selectDate = false;
-    this.resetear = null;
-    this.resetearDate = null;
-    this.horarioReal = [];
+
+    this.form.get('servicio').enable();
   }
 
   cargarFecha(ev: any) {
     this.servicio = null;
-    if (ev.detail.value !== '') {
+    this.form.get('hora').disable();
+    // this.form.patchValue({
+    //   fecha: '',
+    //   hora: ''
+    // });
+
+    if (ev !== '') {
       this.servicio = this.variables.servicios.filter(
-        (serv) => serv.id === ev.detail.value
+        (serv) => serv.id === ev
       )[0];
-      console.log(this.servicio);
-      this.selectServ = true;
-      this.selectDate = false;
-      this.resetearDate = null;
+
+      this.form.get('fecha').enable();
     }
-    this.horarioReal = [];
   }
 
-  cargarHorario(ev: any) {
-    const fecha = ev.detail.value;
-    this.comprobarFecha(fecha, this.servicio.duracion);
-    this.selectDate = true;
-  }
-
-  comprobarFecha(fecha: any, duracion: number) {
-    this.fecha = fecha;
+  comprobarFecha(fecha: any) {
+    const duracion = this.servicio.duracion;
+    console.log(duracion);
     const dia = moment.weekdays(moment(fecha).day());
-    this.select = null;
     this.horarioReal = [];
     const array = [];
     this.horaInvalida = true;
@@ -152,7 +154,7 @@ export class AddReservaPage implements OnInit {
               horaFin
             );
 
-            // console.log(this.horario[i], horaFin, horaValida);
+            console.log(this.horario[i], horaFin, horaValida);
 
             if (!horaValida) {
               array.push(this.horario[i]);
@@ -181,6 +183,7 @@ export class AddReservaPage implements OnInit {
 
       if (this.horarioReal.length > 0) {
         this.esDiaValido = true;
+        this.form.get('hora').enable();
       }
     }
   }
@@ -223,19 +226,17 @@ export class AddReservaPage implements OnInit {
     }
   }
 
-  seleccionaHora(ev: any, duracion: number) {
-    this.hora = ev.target.value;
-    this.horaFin = moment(this.hora, 'HH:mm')
-      .add(duracion, 'm')
-      .format('HH:mm');
-    this.horaInvalida = false;
-  }
-
   async crearReserva() {
     moment.locale('es');
 
+    const { fecha, hora } = this.form.value;
+
+    this.horaFin = moment(this.hora, 'HH:mm')
+    .add(this.servicio.duracion, 'm')
+    .format('HH:mm');
+
     const nuevaFecha = moment(
-      this.fecha + this.hora,
+      fecha + hora,
       'YYYY-MM-DD HH:mm'
     ).calendar();
 
@@ -245,21 +246,22 @@ export class AddReservaPage implements OnInit {
       buttons: [
         {
           text: 'Cancelar',
-          role: 'Cancel'
+          role: 'Cancel',
         },
         {
           text: 'Continuar',
           handler: () => {
-            const id = this.servicio.id + 'lospeinesdero' + this.fecha + this.hora;
+            const id =
+              this.servicio.id + 'lospeinesdero' + fecha + hora;
 
             this.reserva = {
               id,
               uid: 'lospeinesdero',
               nombre: this.servicio.nombre,
               servicio: this.servicio.id,
-              horaInicio: this.hora,
+              horaInicio: hora,
               horaFin: this.horaFin,
-              fecha: this.fecha,
+              fecha,
               precio: this.servicio.precio,
               pagado: false,
             };
@@ -269,15 +271,12 @@ export class AddReservaPage implements OnInit {
             this.presentLoading();
             setTimeout(() => {
               this.reservaSvc.createReserva(this.reserva);
-              this.reservaSvc.getReservas().subscribe(res => this.variables.reservas = res);
-              this.modalCtrl.dismiss({
-                dismissed: true,
-              });
-              this.variables.reservas = [];
-            }, 4000);
-          }
-        }
-      ]
+              this.alerts.presentToast('La reserva se ha creado correctamente', 'success');
+              this.router.navigateByUrl('/reservas');
+            }, 2000);
+          },
+        },
+      ],
     });
 
     return (await alert).present();
@@ -289,5 +288,30 @@ export class AddReservaPage implements OnInit {
       duration: 2000,
     });
     await loading.present();
+  }
+
+  mostrarError(campo: string): string {
+    let mensaje = '';
+
+    if (this.form.get(campo)?.errors?.required) {
+      mensaje = 'Debes rellenar este campo';
+    } else if (this.form.get(campo)?.hasError('max')) {
+      mensaje = 'Número invalido. Debe ser menor a 240 minutos.';
+    } else if (this.form.get(campo)?.hasError('min')) {
+      mensaje = 'Número invalido. Debe ser mayor a 1.';
+    } else if (this.form.get('duracion')?.errors?.multiplo15) {
+      mensaje =
+        'Número inválido. La duración se especifica en tramos de 15 minutos.';
+    }
+
+    return mensaje;
+  }
+
+  esValido(campo: string): boolean {
+    return (
+      this.form.get(campo)?.dirty &&
+      this.form.get(campo)?.invalid &&
+      this.form.get(campo)?.touched
+    );
   }
 }

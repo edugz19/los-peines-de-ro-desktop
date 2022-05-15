@@ -98,6 +98,10 @@ export class ServiciosPage implements OnInit {
           this.serviciosTemp.push(servicio);
         }
       }
+
+      if (this.serviciosTemp.length === 0) {
+        this.sinResultados = true;
+      }
     }
 
     console.log(this.serviciosTemp);

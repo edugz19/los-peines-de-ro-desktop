@@ -6,29 +6,36 @@ ion-datetime {
     font-family: 'Quicksand', sans-serif;
 }
 
-.horario {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 50px;
+* {
+    font-family: 'Quicksand', sans-serif;
 }
 
-.horario img {
-    width: 200px;
-    margin-bottom: 10px;
+.container {
+    margin-top: 20px;
 }
 
-.info-hora {
+.label {
+    width: 170px;
+    font-weight: bold;
+}
+
+.buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    text-align: center;
+
+    ion-button {
+        font-weight: bold;
+        width: 49%;
+    }
 }
 
-.button {
-    font-weight: bold;
+.danger {
+    color: red;
+    text-align: left;
+    margin-top: 5px;
+    font-size: 16px;
 }
 
 @media (prefers-color-scheme: dark) {

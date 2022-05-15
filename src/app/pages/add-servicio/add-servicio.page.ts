@@ -73,14 +73,23 @@ export class AddServicioPage implements OnInit {
     const servicioCat = this.variables.servicios.filter(
       (serv) => serv.categoria === categoria
     );
-    const numero = Number(servicioCat.length);
 
     let id;
 
-    if (numero.toString().length === 1) {
-      id = categoria + '0' + (numero + 1);
-    } else if (numero.toString().length === 2) {
-      id = categoria + (numero + 1);
+    if (servicioCat.length === 0) {
+      id = categoria + '01';
+    } else {
+      const pos = servicioCat.length - 1;
+      const lastServ = servicioCat[pos];
+      const idServ = lastServ.id.substring(2, 4);
+      const numero = Number(idServ) + 1;
+
+
+      if (numero.toString().length === 1) {
+        id = categoria + '0' + numero;
+      } else if (numero.toString().length === 2) {
+        id = categoria + numero;
+      }
     }
 
     this.servicio = {

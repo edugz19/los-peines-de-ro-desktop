@@ -1,49 +1,85 @@
 * {
-    font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 .filtros {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  ion-searchbar {
+    width: 30%;
+    font-weight: bold;
+  }
+
+  ion-button {
+    width: 30%;
+    font-weight: bold;
+  }
+}
+
+.contain {
+  margin: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+
+  .table {
+    width: 60%;
+  }
+
+  th {
+    text-align: center;
+    padding: 10px;
+  }
+
+  td {
+    font-weight: 500;
+    padding: 10px;
+
+    ion-icon {
+      font-size: 25px;
+    }
+  }
+}
+
+.add {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  form {
     width: 100%;
-    margin-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+  }
 
-    ion-searchbar {
-        width: 30%;
-        font-weight: bold;
-    }
+  .input {
+    width: 51%;
+    margin-right: 5px;
+  }
 
-    ion-button {
-        width: 30%;
-        font-weight: bold;
+  .boton {
+    margin-top: -14px;
+    height: 45px;
+
+    ion-icon {
+      font-size: 30px;
     }
+  }
 }
 
-.contain {
-    margin: 20px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1em;
-
-    .table {
-        width: 60%;
-    }
-
-    th {
-        text-align: center;
-        padding: 10px;
-    }
-
-    td {
-        font-weight: 500;
-        padding: 10px;
-
-        ion-icon {
-            font-size: 25px;
-        }
-    }
+.danger {
+  color: red;
+  text-align: left;
+  font-size: 16px;
 }

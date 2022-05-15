@@ -3,17 +3,11 @@
 <div class="contenedor">
     <div class="left">
         <full-calendar [options]="calendarOptions" class="calendar"></full-calendar>
+        <ion-button expand="block" (click)="router.navigateByUrl('/add-reserva')">Crear reserva</ion-button>
     </div>
     <div class="right">
         <h1 class="titulo">Lista de reservas del {{ parsearDia(diaSeleccionado) }}</h1>
         <div *ngIf="reservasDia.length > 0">
-            <!-- <div *ngFor="let reserva of reservasDia" class="item">
-                <p><strong>{{ reserva.nombre | uppercase }}</strong></p>
-                <p>
-                    <ion-icon name="time" slot="end"></ion-icon>
-                    {{ reserva.horaInicio }} - {{ reserva.horaFin }}
-                </p>
-            </div> -->
 
             <ion-card *ngFor="let reserva of reservasDia" class="item">
                 <ion-card-title style="font-size: 1.3em;"><strong>{{ reserva.nombre | uppercase }}</strong></ion-card-title>

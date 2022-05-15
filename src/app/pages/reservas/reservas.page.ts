@@ -3,6 +3,7 @@ import { VariablesService } from '../../services/variables.service';
 import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
 import { Reserva } from 'src/app/models/Reserva';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservas',
@@ -31,7 +32,10 @@ export class ReservasPage implements OnInit {
   public today: string;
   public diaSeleccionado: string;
 
-  constructor(public variables: VariablesService) {}
+  constructor(
+    public variables: VariablesService,
+    public router: Router
+  ) {}
 
   ngOnInit() {
     moment.locale('es');

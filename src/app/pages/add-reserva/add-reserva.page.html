@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="cerrarModal()">
@@ -116,4 +116,79 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</ion-content> -->
+
+<app-header [titulo]="'Crear reserva'"></app-header>
+
+<ion-content>
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="crearReserva()">
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Categoría</span>
+        <select
+          class="form-select form-select-lg"
+          formControlName="categoria"
+          (ngModelChange)="cargarServicios($event)"
+        >
+          <option *ngFor="let cat of variables.categorias" [value]="cat.id">
+            {{ cat.nombre | titlecase }}
+          </option>
+        </select>
+      </div>
+      <p *ngIf="esValido('categoria')" class="danger">
+        {{ mostrarError('categoria') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Servicio</span>
+        <select class="form-select form-select-lg" formControlName="servicio" (ngModelChange)="cargarFecha($event)">
+          <option
+            *ngFor="let serv of servCat"
+            [value]="serv.id"
+          >
+            {{ serv.nombre | titlecase }}
+          </option>
+        </select>
+      </div>
+      <p *ngIf="esValido('servicio')" class="danger">
+        {{ mostrarError('servicio') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Fecha</span>
+        <input
+          type="date"
+          [min]="today"
+          class="form-control"
+          formControlName="fecha"
+          (ngModelChange)="comprobarFecha($event)"
+        />
+      </div>
+      <p *ngIf="esValido('fecha')" class="danger">
+        {{ mostrarError('fecha') }}
+      </p>
+
+      <div class="input-group input-group-lg mb-3">
+        <span class="input-group-text label">Hora</span>
+        <select class="form-select form-select-lg" formControlName="hora">
+          <option
+            *ngFor="let hora of horarioReal"
+            [value]="hora"
+          >
+            {{ hora }}
+          </option>
+        </select>
+      </div>
+      <p *ngIf="esValido('nombre')" class="danger">
+        {{ mostrarError('nombre') }}
+      </p>
+
+      <div class="buttons">
+        <ion-button color="danger" (click)="router.navigateByUrl('/reservas')">Volver atrás</ion-button>
+        <ion-button color="success" type="submit" [disabled]="form.invalid"
+          >Crear Reserva</ion-button
+        >
+      </div>
+    </form>
+  </div>
 </ion-content>

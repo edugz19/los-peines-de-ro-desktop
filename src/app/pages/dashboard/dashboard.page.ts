@@ -25,7 +25,6 @@ export class DashboardPage implements OnInit {
   constructor(
     public variables: VariablesService,
     private loading: LoadingService,
-    public modalCtrl: ModalController,
     public router: Router
   ) {
     this.dineroHoy = 0;
@@ -76,15 +75,6 @@ export class DashboardPage implements OnInit {
     } else if (this.dineroMensual.toFixed(2).toString().length === 7) {
       this.tamanoNumero = 'numero8';
     }
-  }
-
-  async abrirModalAdd() {
-    const modal = this.modalCtrl.create({
-      component: AddReservaPage,
-      cssClass: 'add-reserva-modal'
-    });
-
-    return await (await modal).present();
   }
 
 }

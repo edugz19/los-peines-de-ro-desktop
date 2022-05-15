@@ -31,4 +31,16 @@ export class CategoriasService {
   getCategoriaconID(id: string) {
     return this.db.collection<Categoria>('categorias').doc(id).valueChanges();
   }
+
+  addCategoria(cat: Categoria) {
+    this.db.collection('categorias').doc(cat.id).set(cat);
+  }
+
+  editCategoria(cat: Categoria) {
+    this.db.collection('categorias').doc(cat.id).update(cat);
+  }
+
+  deleteCategoria(id: string) {
+    this.db.collection('categorias').doc(id).delete();
+  }
 }
