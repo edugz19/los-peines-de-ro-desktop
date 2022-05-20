@@ -6,6 +6,7 @@ import { LoadingController, ModalController } from '@ionic/angular';
 import { LoadingService } from '../../services/loading.service';
 import { AddReservaPage } from '../add-reserva/add-reserva.page';
 import { Router } from '@angular/router';
+import { MessagingService } from 'src/app/services/messaging.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,10 +26,12 @@ export class DashboardPage implements OnInit {
   constructor(
     public variables: VariablesService,
     private loading: LoadingService,
-    public router: Router
+    public router: Router,
+    private messaging: MessagingService
   ) {
     this.dineroHoy = 0;
     this.dineroMensual = 0;
+    this.messaging.requestPermission();
   }
 
   async ngOnInit() {

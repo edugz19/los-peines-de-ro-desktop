@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -14,6 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 import { ComponentsModule } from './components/components.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -43,7 +45,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ComponentsModule,
     FullCalendarModule,
     NoopAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AngularFireMessagingModule,
+    HttpClientModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

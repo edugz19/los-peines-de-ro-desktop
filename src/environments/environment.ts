@@ -13,7 +13,9 @@ export const environment = {
     messagingSenderId: '1065261625373',
     measurementId: 'G-11HP88JSTX',
   },
-  production: false
+  production: false,
+  // eslint-disable-next-line max-len
+  serverKey: 'AAAA-AaKcB0:APA91bEGbpGUAHVoWkIPHfpkvUACiS6Ct-cjdPlxaCWmvMdfeluF_P1FacssvRLbjZmVcnyRc-d6MsmMkZJxLBxltZUXTyKedQ56FIUcpF8HRSd4v0uZLLmIzooM7mqj2xD2SNWkeqQn'
 };
 
 /*

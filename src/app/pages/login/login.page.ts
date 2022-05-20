@@ -6,6 +6,7 @@ import { CategoriasService } from 'src/app/services/categorias.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { VariablesService } from 'src/app/services/variables.service';
+import { MessagingService } from '../../services/messaging.service';
 
 @Component({
   selector: 'app-login',
