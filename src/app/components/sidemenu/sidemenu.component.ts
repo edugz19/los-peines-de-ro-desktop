@@ -28,7 +28,6 @@ export class SidemenuComponent implements OnInit {
 
   logout() {
     this.authSvc.logout();
-    window.location.href = 'login';
   }
 
 }

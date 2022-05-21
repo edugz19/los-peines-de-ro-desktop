@@ -1,15 +1,21 @@
 {
   "name": "los-peines-de-ro-desktop",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "1.0.0",
+  "author": "Edu García",
+  "homepage": "https://lospeinesdero.netlify.app",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "electron-forge start",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron": "electron .",
+    "package-linux": "electron-packager . los-peines-de-ro-desktop --overwrite --asar=true --platform=linux --arch=x64 --icon=src/assets/icon.png --prune=true --out=release-builds",
+    "debian": "electron-installer-debian --src release-builds/los-peines-de-ro-desktop-linux-x64/ --arch amd64 --config debian.json",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +39,7 @@
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/timegrid": "^5.11.0",
     "@ionic/angular": "^6.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "firebase": "^9.8.1",
     "moment": "^2.29.3",
     "ngx-pagination": "^5.1.1",
@@ -51,12 +58,18 @@
     "@angular/compiler-cli": "~13.2.2",
     "@angular/language-service": "~13.2.2",
     "@capacitor/cli": "3.5.1",
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "@ionic/angular-toolkit": "^6.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "electron": "^18.2.4",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -73,5 +86,27 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.4.4"
   },
-  "description": "An Ionic project"
+  "description": "Gestión de reservas de peluquería",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "los_peines_de_ro_desktop"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "icon": "./src/assets/icon.png",
+            "name": "los-peines-de-ro-desktop",
+            "maintainer": "Edu García",
+            "productName": "Los Peines de Ro Desktop"
+          }
+        }
+      ]
+    }
+  }
 }

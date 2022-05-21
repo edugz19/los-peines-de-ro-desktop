@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AlertsService } from './alerts.service';
 
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private alert: AlertsService
+    private alert: AlertsService,
+    private router: Router
   ) { }
 
   async login(email: string, password: string) {
@@ -26,6 +28,7 @@ export class AuthService {
 
   async logout() {
     await this.afAuth.signOut();
+    this.router.navigateByUrl('/login');
   }
 
   getUsuarioActual() {
