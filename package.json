@@ -15,7 +15,9 @@
     "package-linux": "electron-packager . los-peines-de-ro-desktop --overwrite --asar=true --platform=linux --arch=x64 --icon=src/assets/icon.png --prune=true --out=release-builds",
     "debian": "electron-installer-debian --src release-builds/los-peines-de-ro-desktop-linux-x64/ --arch amd64 --config debian.json",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "build:package": "electron-packager . --out=out --overwrite",
+    "build:snap": "electron-installer-snap --src=electron-linux-x64"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +30,7 @@
     "@angular/platform-browser": "~13.2.2",
     "@angular/platform-browser-dynamic": "~13.2.2",
     "@angular/router": "~13.2.2",
+    "@angular/service-worker": "~13.2.2",
     "@capacitor/app": "1.1.1",
     "@capacitor/core": "3.5.1",
     "@capacitor/haptics": "1.1.4",

@@ -23,6 +23,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -47,7 +48,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NoopAnimationsModule,
     NgxPaginationModule,
     AngularFireMessagingModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
