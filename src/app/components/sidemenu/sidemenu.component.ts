@@ -15,7 +15,7 @@ export class SidemenuComponent implements OnInit {
     { title: 'Reservas', url: '/reservas', icon: 'calendar' },
     { title: 'Servicios', url: '/servicios', icon: 'server' },
     { title: 'Categorías', url: '/categorias', icon: 'list' },
-    { title: 'Contabilidad', url: '/contabilidad', icon: 'logo-euro' }
+    { title: 'Facturación', url: '/contabilidad', icon: 'logo-euro' }
   ];
 
   constructor(

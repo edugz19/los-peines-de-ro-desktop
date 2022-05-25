@@ -76,10 +76,6 @@ export class AddReservaPage implements OnInit {
     this.servCat = [];
     this.form.get('fecha').disable();
     this.form.get('hora').disable();
-    // this.form.patchValue({
-    //   fecha: '',
-    //   hora: ''
-    // });
 
     this.servCat = this.variables.servicios.filter(
       (serv) => serv.categoria === ev
@@ -231,7 +227,7 @@ export class AddReservaPage implements OnInit {
 
     const { fecha, hora } = this.form.value;
 
-    this.horaFin = moment(this.hora, 'HH:mm')
+    this.horaFin = moment(hora, 'HH:mm')
     .add(this.servicio.duracion, 'm')
     .format('HH:mm');
 

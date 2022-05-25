@@ -8,4 +8,5 @@ export class Reserva {
     fecha: string;
     precio: number;
     pagado: boolean;
+    completada?: boolean;
 }

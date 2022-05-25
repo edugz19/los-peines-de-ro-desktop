@@ -1,5 +1,20 @@
-<app-header [titulo]="'Contabilidad'"></app-header>
+<app-header [titulo]="'facturación'"></app-header>
 
 <ion-content>
-
+    <ion-segment (ionChange)="segmentChanged($event)" value="semanal">
+        <ion-segment-button value="semanal">
+          <ion-label>SEMANAL</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="mensual">
+          <ion-label>Mensual</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="anual">
+            <ion-label>Anual</ion-label>
+          </ion-segment-button>
+      </ion-segment>
+    <div class="container">
+        <canvas id="canvas">{{ chart }}</canvas>
+        <!-- <canvas id="canvasMensual" *ngIf="segment === 'mensual'">{{ chart }}</canvas>
+        <canvas id="canvasAnual" *ngIf="segment === 'anual'">{{ chart }}</canvas> -->
+    </div>
 </ion-content>
