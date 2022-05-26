@@ -12,8 +12,8 @@
             <ion-card *ngFor="let reserva of reservasDia" class="item">
                 <ion-card-title style="font-size: 1.3em;"><strong>{{ reserva.nombre | uppercase }}</strong></ion-card-title>
                 <ion-card-title class="hora"><ion-icon name="time-outline" style="margin-right: 5px;"></ion-icon> {{ reserva.horaInicio }} - {{ reserva.horaFin }}</ion-card-title>
-                <ion-card-title *ngIf="reserva.pagado === true">{{ reserva.uid }} - Pagado online</ion-card-title>
-                <ion-card-title *ngIf="reserva.pagado === false">{{ reserva.uid }} - Pendiente de pago</ion-card-title>
+                <ion-card-title *ngIf="reserva.pagado === true">{{ obtenerNombreUsuario(reserva.uid) }} - Pagado online</ion-card-title>
+                <ion-card-title *ngIf="reserva.pagado === false">{{ obtenerNombreUsuario(reserva.uid) }} - Pendiente de pago</ion-card-title>
             </ion-card>
         </div>
         

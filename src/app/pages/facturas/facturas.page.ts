@@ -54,7 +54,7 @@ export class FacturasPage implements OnInit {
     if (this.segment === 'semanal') {
       labels = this.dias;
       data = this.dataSemanal;
-      label = 'Facturación semanal de los últimos 5 días';
+      label = 'Facturación diaria';
       backgroundColor = 'rgba(138,221,45,0.3)';
       borderColor = 'rgba(138,221,45,0.8)';
     }
@@ -62,7 +62,7 @@ export class FacturasPage implements OnInit {
     if (this.segment === 'mensual') {
       labels = this.meses;
       data = this.dataMensual;
-      label = 'Facturación mensual de los últimos 12 meses';
+      label = 'Facturación mensual';
       backgroundColor = 'rgba(230,43,21,0.3)';
       borderColor = 'rgba(230,43,21,0.8)';
     }
@@ -70,7 +70,7 @@ export class FacturasPage implements OnInit {
     if (this.segment === 'anual') {
       labels = this.anios;
       data = this.dataAnual;
-      label = 'Facturación anual de los últimos 5 años';
+      label = 'Facturación anual';
       backgroundColor = 'rgba(45,34,230,0.3)';
       borderColor = 'rgba(45,34,230,0.8)';
     }

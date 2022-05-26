@@ -3,6 +3,7 @@ import { CategoriasService } from './services/categorias.service';
 import { ReservasService } from './services/reservas.service';
 import { ServiciosService } from './services/servicios.service';
 import { VariablesService } from './services/variables.service';
+import { UsuariosService } from './services/usuarios.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent {
     public variables: VariablesService,
     private reservaSvc: ReservasService,
     private categoriaSvc: CategoriasService,
-    private servicioSvc: ServiciosService
+    private servicioSvc: ServiciosService,
+    private usuariosSvc: UsuariosService
   ) {
     console.log('App component');
     this.initializateData();
@@ -32,6 +34,7 @@ export class AppComponent {
     this.servicioSvc.getServicios().subscribe( servs => this.variables.servicios = servs );
     this.reservaSvc.getReservas().subscribe( reservas => this.variables.reservas = reservas);
     this.categoriaSvc.getCategorias().subscribe( cats => this.variables.categorias = cats );
+    this.usuariosSvc.getUsuarios().subscribe( users => this.variables.usuarios = users );
     console.log('Inicializado');
   }
 }

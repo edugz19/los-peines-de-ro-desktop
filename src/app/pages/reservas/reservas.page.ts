@@ -4,6 +4,7 @@ import { CalendarOptions } from '@fullcalendar/angular'; // useful for typecheck
 import { Reserva } from 'src/app/models/Reserva';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-reservas',
@@ -34,7 +35,8 @@ export class ReservasPage implements OnInit {
 
   constructor(
     public variables: VariablesService,
-    public router: Router
+    public router: Router,
+    public usuariosSvc: UsuariosService
   ) {}
 
   ngOnInit() {
@@ -69,5 +71,13 @@ export class ReservasPage implements OnInit {
 
   parsearDia(fecha: string): string {
     return moment(fecha, 'YYYY-MM-DD').format('LL');
+  }
+
+  obtenerNombreUsuario(uid: string): string {
+    for (const user of this.variables.usuarios) {
+      if (user.uid === uid) {
+        return user.displayName;
+      }
+    }
   }
 }
