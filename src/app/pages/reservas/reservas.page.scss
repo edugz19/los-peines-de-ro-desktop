@@ -60,3 +60,40 @@
 .button {
     font-weight: bold;
 }
+
+.col-button {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        padding: 5px;
+        margin: 5px;
+
+        ion-icon {
+            font-size: 35px;
+            color: white;
+        }
+    }
+
+    ion-icon {
+        font-size: 1.4em;
+    }
+}
+
+.completada {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+
+    ion-badge {
+        font-size: 20px;
+        border-radius: 20px;
+        padding: 10px;
+    }
+}

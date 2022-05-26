@@ -5,6 +5,9 @@ import { Reserva } from 'src/app/models/Reserva';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios.service';
+import { ReservasService } from '../../services/reservas.service';
+import { AlertController } from '@ionic/angular';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-reservas',
@@ -35,8 +38,11 @@ export class ReservasPage implements OnInit {
 
   constructor(
     public variables: VariablesService,
+    public resSvc: ReservasService,
     public router: Router,
-    public usuariosSvc: UsuariosService
+    public usuariosSvc: UsuariosService,
+    public alert: AlertController,
+    public app: AppComponent
   ) {}
 
   ngOnInit() {
@@ -74,10 +80,61 @@ export class ReservasPage implements OnInit {
   }
 
   obtenerNombreUsuario(uid: string): string {
+    if (uid === 'lospeinesdero') {
+      return uid;
+    }
+
     for (const user of this.variables.usuarios) {
       if (user.uid === uid) {
         return user.displayName;
       }
     }
+  }
+
+  async completarReserva(reserva: Reserva) {
+    const alert = this.alert.create({
+      header: 'Completar reserva',
+      message:
+        'La reserva será completada y se generará el comprobante. ¿Desea continuar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'Cancel',
+        },
+        {
+          text: 'Continuar',
+          handler: () => {
+            reserva.completada = true;
+            reserva.pagado = true;
+            this.resSvc.updateReserva(reserva);
+          },
+        },
+      ],
+    });
+
+    return (await alert).present();
+  }
+
+  async borrarReserva(id: string) {
+    const alert = this.alert.create({
+      header: '¿Desea borrar la reserva?',
+      message: 'No podrá deshacer los cambios. ¿Quiere continuar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'Cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.resSvc.deleteReserva(id);
+            this.reservasDia = this.reservasDia.filter((res) => id !== res.id);
+            console.log(this.reservasDia);
+          },
+        },
+      ],
+    });
+
+    return (await alert).present();
   }
 }

@@ -45,4 +45,12 @@ export class ReservasService {
       pagado: reserva.pagado
     });
   }
+
+  updateReserva(reserva: Reserva) {
+    this.db.collection('reservas').doc(reserva.id).update(reserva);
+  }
+
+  deleteReserva(id: string) {
+    this.db.collection('reservas').doc(id).delete();
+  }
 }
