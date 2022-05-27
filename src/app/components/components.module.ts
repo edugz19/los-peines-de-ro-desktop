@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import { CarouselComponent } from './carousel/carousel.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -18,11 +19,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [
     HeaderComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    CarouselComponent
   ],
   exports: [
     HeaderComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,

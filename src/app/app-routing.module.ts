@@ -30,10 +30,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'download',
-    loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate: [LoginGuard]
@@ -53,6 +49,14 @@ const routes: Routes = [
   {
     path: 'add-servicio/:id',
     loadChildren: () => import('./pages/add-servicio/add-servicio.module').then( m => m.AddServicioPageModule)
+  },
+  {
+    path: 'download-android',
+    loadChildren: () => import('./pages/download-android/download-android.module').then( m => m.DownloadAndroidPageModule)
+  },
+  {
+    path: 'download-desktop',
+    loadChildren: () => import('./pages/download-desktop/download-desktop.module').then( m => m.DownloadDesktopPageModule)
   }
 ];
 

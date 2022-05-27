@@ -1,4 +1,4 @@
-import { CarouselItem } from '../models/carouselItem.interface';
+import { CarouselItem } from '../models/CarouselItem';
 
 export const CAROUSEL_DATA_ITEMS: CarouselItem[] = [
     {

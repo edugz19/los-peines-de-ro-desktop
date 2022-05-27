@@ -1,0 +1,54 @@
+<ion-content style="background-color: whitesmoke">
+  <div class="container-fluid px-0">
+    <div class="row bg-dark h-100">
+      <div class="col-12 px-0">
+        <app-carousel [items]="carouselData"></app-carousel>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 style="text-align: center; margin-bottom: 50px">
+      Descargar aplicación de escritorio de <strong>Los Peines de Ro</strong>
+    </h1>
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+        <img src="assets/mockup_desktop.jpg" alt="Mockup" />
+      </div>
+      <div class="col-lg-4 col-md-12 descarga">
+        <h3 class="disponible">
+          Disponible en:
+          <img src="assets/windows.png" alt="Windows Logo" />
+          <img src="assets/linux.png" alt="Linux Logo" />
+        </h3>
+        <a
+          href=""
+          download="lospeinesderodesktopSetup.exe"
+          ><button type="button" class="btn btn-primary">
+            <img src="assets/windows.png" alt="windows-icon" /> Descargar
+          </button></a
+        >
+        <a
+          href="https://firebasestorage.googleapis.com/v0/b/los-peines-de-ro.appspot.com/o/files%2Flospeinesderodesktop.deb?alt=media&token=94ad44ef-93c9-48a3-87d8-a064e42c11d3"
+          download="lospeinesderodesktop.deb"
+          ><button type="button" class="btn btn-primary">
+            <img src="assets/linux.png" alt="linux-icon" /> Descargar
+          </button></a
+        >
+      </div>
+    </div>
+
+    <footer
+      class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+    >
+      <p class="col-md-4 mb-0">© 2022 Los Peines de Ro</p>
+
+      <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item"><ion-icon name="logo-instagram"></ion-icon></li>
+        <li class="nav-item"><ion-icon name="logo-twitter"></ion-icon></li>
+        <li class="nav-item"><ion-icon name="logo-whatsapp"></ion-icon></li>
+        <li class="nav-item"><ion-icon name="logo-linkedin"></ion-icon></li>
+      </ul>
+    </footer>
+  </div>
+</ion-content>
