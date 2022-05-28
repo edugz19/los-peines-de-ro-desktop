@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { AngularFireRemoteConfigModule } from '@angular/fire/compat/remote-config';
 
 import { ComponentsModule } from './components/components.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -48,6 +49,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NoopAnimationsModule,
     NgxPaginationModule,
     AngularFireMessagingModule,
+    AngularFireRemoteConfigModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

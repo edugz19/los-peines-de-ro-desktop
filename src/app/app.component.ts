@@ -4,6 +4,7 @@ import { ReservasService } from './services/reservas.service';
 import { ServiciosService } from './services/servicios.service';
 import { VariablesService } from './services/variables.service';
 import { UsuariosService } from './services/usuarios.service';
+import { AngularFireRemoteConfig } from '@angular/fire/compat/remote-config';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +25,9 @@ export class AppComponent {
     private reservaSvc: ReservasService,
     private categoriaSvc: CategoriasService,
     private servicioSvc: ServiciosService,
-    private usuariosSvc: UsuariosService
+    private usuariosSvc: UsuariosService,
+    private remote: AngularFireRemoteConfig
   ) {
-    console.log('App component');
     this.initializateData();
   }
 
@@ -35,6 +36,10 @@ export class AppComponent {
     this.reservaSvc.getReservas().subscribe( reservas => this.variables.reservas = reservas);
     this.categoriaSvc.getCategorias().subscribe( cats => this.variables.categorias = cats );
     this.usuariosSvc.getUsuarios().subscribe( users => this.variables.usuarios = users );
+    this.remote.fetchAndActivate().then(() => {
+      const array = this.remote.getAll();
+      console.log(array);
+    });
     console.log('Inicializado');
   }
 }

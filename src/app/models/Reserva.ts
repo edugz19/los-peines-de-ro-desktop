@@ -9,4 +9,5 @@ export class Reserva {
     precio: number;
     pagado: boolean;
     completada?: boolean;
+    urlTicket?: string;
 }

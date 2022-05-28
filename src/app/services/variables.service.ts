@@ -13,11 +13,13 @@ export class VariablesService {
   servicios: Servicio[];
   categorias: Categoria[];
   usuarios: Usuario[];
+  public imagenBlob: string;
 
   constructor() {
     this.reservas = [];
     this.servicios = [];
     this.categorias = [];
     this.usuarios = [];
+    this.imagenBlob = '';
   }
 }
