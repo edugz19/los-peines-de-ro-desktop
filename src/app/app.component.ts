@@ -37,8 +37,11 @@ export class AppComponent {
     this.categoriaSvc.getCategorias().subscribe( cats => this.variables.categorias = cats );
     this.usuariosSvc.getUsuarios().subscribe( users => this.variables.usuarios = users );
     this.remote.fetchAndActivate().then(() => {
-      const array = this.remote.getAll();
-      console.log(array);
+      this.remote.getValue('logo').
+      then((blob) => {
+        console.log(blob);
+        this.variables.imagenBlob = blob.asString();
+      });
     });
     console.log('Inicializado');
   }

@@ -12,6 +12,7 @@ import { AppComponent } from '../../app.component';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -114,9 +115,9 @@ export class ReservasPage implements OnInit {
         {
           text: 'Continuar',
           handler: () => {
-            // reserva.completada = true;
-            // reserva.pagado = true;
-            // this.resSvc.updateReserva(reserva);
+            reserva.completada = true;
+            reserva.pagado = true;
+            this.resSvc.updateReserva(reserva);
 
             this.generarTicket(reserva);
           },
@@ -179,16 +180,16 @@ export class ReservasPage implements OnInit {
             ],
           ],
         },
-        // {
-        //   columns: [
-        //     {
-        //       image: this.variables.imagenBlob,
-        //       style: 'imagen',
-        //       // alignment: 'center',
-        //       width: 80,
-        //     },
-        //   ],
-        // },
+        {
+          columns: [
+            {
+              image: this.variables.imagenBlob,
+              style: 'imagen',
+              // alignment: 'center',
+              width: 80,
+            },
+          ],
+        },
         {
           columns: [
             {
@@ -327,11 +328,24 @@ export class ReservasPage implements OnInit {
 
     const pdf = pdfMake.createPdf(dd);
 
-    // pdf.getBlob((blob) => {
-    //   console.log(blob);
-    //   const filePath = `tickets/${reserva.id}.pdf`;
-    //   this.ref = this.storage.ref(filePath);
-    //   this.afTask = this.ref.put(blob);
-    // });
+    pdf.getBlob((blob) => {
+      console.log(blob);
+      const filePath = `tickets/${reserva.id}.pdf`;
+      this.ref = this.storage.ref(filePath);
+      this.afTask = this.ref.put(blob);
+
+      setTimeout(() => {
+        this.ref.getDownloadURL().subscribe( url => {
+          reserva.urlTicket = url;
+          this.resSvc.updateReserva(reserva);
+        });
+      }, 2000);
+    });
+  }
+
+  verFactura(reserva: Reserva) {
+    if(reserva.urlTicket !== undefined) {
+      window.open(reserva.urlTicket, '_blank');
+    }
   }
 }
