@@ -67,7 +67,7 @@ ion-input {
 }
 
 @media (prefers-color-scheme: dark) {
-    ion-input {
-        color: white;
+    ion-item {
+        --ion-item-background:#fff;
     }
 }

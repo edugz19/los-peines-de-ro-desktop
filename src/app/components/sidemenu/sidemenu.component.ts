@@ -17,14 +17,21 @@ export class SidemenuComponent implements OnInit {
     { title: 'Categorías', url: '/categorias', icon: 'list' },
     { title: 'Facturación', url: '/contabilidad', icon: 'logo-euro' }
   ];
+  public modoOscuro: boolean;
 
   constructor(
     public menuCtrl: MenuController,
-    private authSvc: AuthService,
-    private router: Router
+    private authSvc: AuthService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    if (prefersDark.matches) {
+      this.modoOscuro = true;
+    } else {
+      this.modoOscuro = false;
+    }
+  }
 
   logout() {
     this.authSvc.logout();

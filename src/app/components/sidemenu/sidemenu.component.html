@@ -1,6 +1,7 @@
 <ion-menu side="start" menuId="first" contentId="main">
   <ion-header>
-    <img src="assets/logo.png" alt="Logo">
+    <img src="assets/logo.png" alt="Logo" *ngIf="!modoOscuro">
+    <img src="assets/logo-dark.png" alt="Logo" *ngIf="modoOscuro">
   </ion-header>
 
   <ion-content>

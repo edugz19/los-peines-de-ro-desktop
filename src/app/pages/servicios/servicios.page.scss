@@ -42,3 +42,9 @@
         }
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    th, td {
+        color: white;
+    }
+}
