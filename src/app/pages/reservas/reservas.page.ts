@@ -338,6 +338,7 @@ export class ReservasPage implements OnInit {
         this.ref.getDownloadURL().subscribe( url => {
           reserva.urlTicket = url;
           this.resSvc.updateReserva(reserva);
+          pdfMake.createPdf(dd).print();
         });
       }, 2000);
     });
