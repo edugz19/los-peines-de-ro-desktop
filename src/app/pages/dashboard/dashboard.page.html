@@ -84,9 +84,9 @@
                   <img src="assets/dashboard/facturacion.png" alt="" width="200px" />
                 </div>
                 <div class="datos">
-                  <h3 style="line-height: 1.3;">
+                  <h3 style="line-height: 1.5;">
                     Hoy tienes facturado un total de  
-                    <span class="numero4"
+                    <span [class]="tamanoNumero"
                       >{{ this.dineroHoy.toFixed(2) || 0 }}</span
                     >
                     <span class="euro">€</span>

@@ -1,0 +1,2 @@
+# Aplicación de escritorio de Los Peines de Ro
+Esta aplicación se encarga de la gestión de reservas, control de servicios y resumen de la facturación de los últimos días, meses y años. Desarrollada bajo ANgular 13 e Ionic 6.
